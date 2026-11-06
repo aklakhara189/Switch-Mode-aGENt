@@ -1,0 +1,61 @@
+# Agent Configuration
+agent_name: "bug-investigator"
+agent_type: "ai-investigator"
+description: "AI Bug Investigator that analyzes code, identifies root causes, generates tests and patches"
+
+# Capabilities
+capabilities:
+  - code_analysis: true
+  - log_analysis: true
+  - test_generation: true
+  - patch_generation: true
+  - auto_apply: false  # NEVER auto-apply - requires human approval
+
+# Investigation Settings
+investigation:
+  max_files_to_scan: 50
+  supported_languages:
+    - python
+  log_patterns:
+    - "ERROR"
+    - "WARNING"
+    - "CRITICAL"
+    - "Exception"
+    - "Traceback"
+  
+# Bug Pattern Detection
+patterns:
+  integer_division:
+    description: "Integer division used instead of float division"
+    regex: "\\b\\w+\\s*//\\s*\\w+"
+    fix_hint: "Replace // with / for float division"
+  
+  missing_aggregation:
+    description: "Loop result not accumulated properly"
+    regex: "for .+ in .+:.*=(?!=)"
+    fix_hint: "Use += instead of = inside loops for accumulation"
+  
+  off_by_one:
+    description: "Off-by-one error in range or indexing"
+    regex: "range\\(.*len\\("
+    fix_hint: "Check range boundaries"
+
+# Safety
+safety:
+  require_human_approval: true
+  create_backups: true
+  dry_run_first: true
+  max_patch_size_lines: 100
+
+# Switch Integration
+switch:
+  post_to_room: true
+  format: "markdown"
+  notifications:
+    - investigation_started
+    - root_cause_found
+    - test_results
+    - patch_proposed
+    - approval_requested
+    - patch_applied
+    - resolution_complete
