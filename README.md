@@ -1,4 +1,4 @@
-# Flip-The-Switch_HH ->
+# Switch Mode Agent 🤖🛠️
 
 [![Hackathon](https://img.shields.io/badge/Hackathon-WeMakeDevs%20Flip%20the%20Switch-FF895E)](https://www.wemakedevs.org/hackathons/switch)
 [![Track](https://img.shields.io/badge/Track-Best%20Business%20Workflow-blue)](#)
